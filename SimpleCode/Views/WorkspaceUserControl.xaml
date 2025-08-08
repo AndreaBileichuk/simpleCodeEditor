@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="SimpleCode.Views.WorkspaceUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SimpleCode.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="800" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <Style x:Key="TerminalButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#C75B7A" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderBrush" Value="#921A40" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="15,5" />
+            <Setter Property="Margin" Value="0,5,5,5" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#921A40" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#921A40" />
+                    <Setter Property="BorderBrush" Value="#C75B7A" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" BorderBrush="#C75B7A" BorderThickness="0 0 1 0">
+            <local:FileExplorerView DataContext="{Binding FileExplorerViewModel}" />
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="250" />
+            </Grid.RowDefinitions>
+
+            <local:CodeWorkspaceView DataContext="{Binding CodeWorkspaceViewModel}" Grid.Row="0" />
+
+            <Border Grid.Row="1" BorderBrush="#C75B7A" BorderThickness="0 1 0 0" Margin="10">
+                <Grid DataContext="{Binding TerminalViewModel}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="40" />
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer Grid.Row="0" Background="#921A40" VerticalScrollBarVisibility="Auto">
+                        <TextBlock Text="{Binding Output}"
+                                   Foreground="#F4D9D0"
+                                   FontFamily="Consolas"
+                                   TextWrapping="Wrap"
+                                   Padding="8" />
+                    </ScrollViewer>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Background="#D9ABAB">
+                        <TextBox Text="{Binding InputCommand, UpdateSourceTrigger=PropertyChanged}"
+                                 FontFamily="Consolas"
+                                 Width="500"
+                                 Background="#F4D9D0"
+                                 Foreground="#921A40"
+                                 BorderBrush="#C75B7A"
+                                 BorderThickness="1"
+                                 Margin="5"
+                                 Padding="5,2">
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding ExecuteCommand}" Key="Enter" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button Content="Enter"
+                                Command="{Binding ExecuteCommand}"
+                                Style="{StaticResource TerminalButtonStyle}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="4" />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

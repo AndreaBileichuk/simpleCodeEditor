@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <ApplicationIcon>Assets\Images\simplecode-logo.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Core.System.Windows.Forms" Version="1.0.0-alpha6"/>
+        <PackageReference Include="FontAwesome.WPF" Version="4.7.0.9"/>
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135"/>
+        <PackageReference Include="SharpVectors.Wpf" Version="1.8.4.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Icons\icons8-c.svg"/>
+        <None Remove="Icons\icons8-c++.svg"/>
+        <None Remove="Icons\icons8-file.svg"/>
+        <None Remove="Icons\icons8-folder.svg"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Resource Include="Assets\Icons\icons8-c++.svg"/>
+        <Resource Include="Assets\Icons\icons8-c.svg"/>
+        <Resource Include="Assets\Icons\icons8-file.svg"/>
+        <Resource Include="Assets\Icons\icons8-folder.svg"/>
+        <None Remove="Assets\Images\pink-clouds.jpg"/>
+        <None Remove="Assets\Images\simplecode-logo.jpg"/>
+        <Resource Include="Assets\Images\simplecode-logo.jpg"/>
+        <None Remove="Assets\Images\simplecode-logo.ico"/>
+        <Resource Include="Assets\Images\simplecode-logo.ico"/>
+    </ItemGroup>
+
+</Project>
